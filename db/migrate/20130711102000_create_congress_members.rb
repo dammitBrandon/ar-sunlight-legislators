@@ -1,5 +1,5 @@
 class CreateCongressMembers < ActiveRecord::Migration
-  def self.change
+  def change
     create_table :congress_members do |t|
       t.string :first_name, null: false
       t.string :last_name, null: false
