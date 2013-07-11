@@ -1,7 +1,7 @@
 require 'csv'
 HEADERS = %w{firstName lastName party state district webform gender phone inOffice fax birthday twitterId branch}
 class SunlightLegislatorsImporter
-  def self.import(filename = "./db/data/legislators.csv")
+  def self.import(filename = "./db/data/test_legislators.csv")
     csv = CSV.new(File.open(filename), :headers => HEADERS, :header_converters :sybol)
     csv.each do |row|
       row.each do |field, value|
