@@ -1,14 +1,24 @@
 require 'csv'
-HEADERS = %w{firstName lastName party state district webform gender phone inOffice fax birthday twitterId branch}
+require_relative '../app/models/congressmember'
 class SunlightLegislatorsImporter
-  def self.import(filename = "./db/data/test_legislators.csv")
-    csv = CSV.new(File.open(filename), :headers => HEADERS, :header_converters :sybol)
+  def self.import(filename = File.dirname(__FILE__) + "/../db/data/legislators.csv")
+    csv = CSV.new(File.open(filename), headers: true, header_converters: :symbol)
     csv.each do |row|
-      row.each do |field, value|
-        # TODO: begin
-        raise NotImplementedError, "TODO: figure out what to do with this row and do it!"
-        # TODO: end
-      end
+      CongressMember.create!(
+      firstname: row[:firstname],
+      lastname: row[:lastname],
+      party: row[:party],
+      state: row[:state],
+      in_office: row[:in_office],
+      gender: row[:gender],
+      phone: row[:row],
+      fax: row[:fax],
+      website: row[:website],
+      webform: row[:webform],
+      twitter_id: row[:twitter_id],
+      district: row[:district],
+      title: row[:title],
+      birthday: row[:birthdate])
     end
   end
 end
@@ -23,3 +33,4 @@ end
 # rescue NotImplementedError => e
 #   $stderr.puts "You shouldn't be running this until you've modified it with your implementation!"
 # end
+SunlightLegislatorsImporter.import
